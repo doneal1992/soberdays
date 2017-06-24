@@ -1,0 +1,14 @@
+<ion-content padding>
+  <ion-slides pager>
+    <ion-slide *ngFor="let step of steps; let i = index">
+      <ion-card>
+        <ion-card-header>
+          Step #{{i +1}}
+        </ion-card-header>
+        <ion-card-content>
+          {{step}}
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
