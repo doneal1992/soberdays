@@ -1,18 +1,23 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { SoberClockService } from './sober-clock.srvc';
-import { IonicStorageModule, Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
+import { YoutubeService} from './youtube.srvc';
+import { HttpModule } from '@angular/http';
+
 
 @NgModule({
   declarations: [
   ],
   imports: [
-    IonicStorageModule
+    IonicStorageModule,
+    HttpModule
   ],
   bootstrap: [],
   entryComponents: [
   ],
   providers: [
-    SoberClockService
+    SoberClockService,
+    YoutubeService,
   ]
 })
 export class ServicesModule {}

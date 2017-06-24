@@ -1,0 +1,59 @@
+page-meditation {
+  .card-background-page {
+      ion-card {
+          position: relative;
+          text-align: center;
+          margin-top: 15px;
+          margin-bottom: 15px;
+      }
+      .card-title {
+          position: absolute;
+          top: 36%;
+          font-size: 2.0em;
+          width: 100%;
+          font-weight: bold;
+          color: #fff;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      }
+      .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 82%;
+          width: 100%;
+          color: #fff;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      }
+      .card-btn {
+          font-size: 6.0em;
+          padding-top: 1%;
+          padding-bottom: 1%;
+          padding-left: 3%;
+          padding-right: 3%;
+          position: absolute;
+          top: 50%;
+          width: 20%;
+          left: 40%;
+          color: white;
+          border-radius: 25%;
+          background-color: #333;
+      }
+      .card-btn:hover {
+          background-color: red;
+      }
+  }
+
+  .search {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  #search-icon {
+    margin-top: 30px;
+  }
+
+  ion-input {
+    margin-bottom: -30px;
+  }
+}
+
+

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { TwelveSteps } from '../../common/constants/twelve-steps.cnst'
 
 @Component({

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SoberClockService } from '../../services/sober-clock.srvc';
 import {Observable} from 'rxjs/Rx';
@@ -10,7 +9,6 @@ import {Observable} from 'rxjs/Rx';
 })
 export class SoberClockPage {
   private dateSober: any;
-  private hasSoberDate: boolean = false;
   private daysSober: number = 0;
   private hoursSober: number = 0;
   private minutesSober: number = 0;
@@ -36,16 +34,12 @@ export class SoberClockPage {
     });
   }
 
-  getHasSoberDate =() => {
+  getHasSoberDate = () => {
     return this.soberClockService.getHasSoberDate();
   }
 
   saveDate = () => {
-    this.storage.set("dateSober", this.dateSober).then(() => {
-          this.hasSoberDate = true;
-          const timeDiff = Math.abs(new Date().getTime() - new Date(this.dateSober).getTime());
-          this.daysSober = Math.ceil(timeDiff/ (1000 * 3600 * 24));
-    });
+    this.soberClockService.saveDate(this.dateSober);
   }
 
 }

@@ -24,7 +24,9 @@
         "@ionic-native/date-picker": "^3.12.1",
         "@ionic-native/splash-screen": "3.10.2",
         "@ionic-native/status-bar": "3.10.2",
+        "@ionic-native/youtube-video-player": "^3.12.1",
         "@ionic/storage": "2.0.1",
+        "com.bunkerpalace.cordova.YoutubeVideoPlayer": "git+https://github.com/JonSmart/CordovaYoutubeVideoPlayer.git",
         "cordova-android": "^6.2.3",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-datepicker": "^0.9.3",
@@ -54,7 +56,8 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {}
+            "ionic-plugin-keyboard": {},
+            "com.bunkerpalace.cordova.YoutubeVideoPlayer": {}
         },
         "platforms": [
             "android"

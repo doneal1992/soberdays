@@ -11,8 +11,6 @@ export class SoberClockService {
   private minutesSober: any = 0;
   private secondsSober: any = 0;
   private startOfDay: any = new Date()
-  private startOfHour: any;
-  private startOfMinutes: any;
 
   constructor(private storage: Storage) {
     this.startOfDay.setHours(0,0,0,0);
@@ -22,11 +20,11 @@ export class SoberClockService {
         this.hasSoberDate = true;
       }
       let timer = Observable.timer(0,1000);
-      timer.subscribe(this.getSoberTime);
+      timer.subscribe(this.setSoberTime);
     });
   }
 
-  getSoberTime = () => {
+  setSoberTime = () => {
     this.setDaysSober();
     this.setHoursSober();
     this.setMinutesSober();
@@ -54,7 +52,7 @@ export class SoberClockService {
   }
 
   saveDate = (date : any) => {
-    this.storage.set("dateSober", date).then(() => {
+    return this.storage.set("dateSober", date).then(() => {
           this.hasSoberDate = true;
     });
   }
