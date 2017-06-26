@@ -6,9 +6,13 @@ import { TwelveSteps } from '../../common/constants/twelve-steps.cnst'
   templateUrl: 'twelve-steps.html'
 })
 export class TwelveStepsPage {
-  private steps: Array<string> = [];
+  private steps: Array<any> = [];
   constructor() {
     this.steps = TwelveSteps;
+  }
+
+  markCompleted = (step : any) => {
+    step.isCompleted = !step.isCompleted;
   }
 
 }

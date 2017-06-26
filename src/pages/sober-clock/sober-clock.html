@@ -1,16 +1,16 @@
 <ion-content padding>
   <ion-grid>
-    <ion-row class="gutters center-page" *ngIf="hasSoberDate">
+    <ion-row class="gutters center-page" *ngIf="hideDate">
       <ion-col col-12>
         <ion-item>
-          <ion-datetime class="centered" displayFormat="MM/DD/YYYY" [(ngModel)]="dateSober" placeholder="First Day Sober"></ion-datetime>
+          <ion-datetime class="centered" displayFormat="MM/DD/YYYY" [(ngModel)]="this.dateSober" placeholder="First Day Sober"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col col-12 class="centered">
         <button ion-button (click)='saveDate();'>Save</button>
       </ion-col>
     </ion-row>
-    <ion-row class="gutters center-page" *ngIf="!hasSoberDate">
+    <ion-row class="gutters center-page" *ngIf="!hideDate">
       <ion-col col-12 class="centered">
         <span class="centered xlarge-font"> You have been sober for: </span>
       </ion-col>

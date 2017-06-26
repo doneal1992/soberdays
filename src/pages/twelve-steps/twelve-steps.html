@@ -1,13 +1,14 @@
 <ion-content padding>
   <ion-slides pager>
-    <ion-slide *ngFor="let step of steps; let i = index">
+    <ion-slide *ngFor="let step of steps">
       <ion-card>
         <ion-card-header>
-          Step #{{i +1}}
+          Step #{{step.stepNum}}
         </ion-card-header>
         <ion-card-content>
-          {{step}}
+          {{step.step}}
         </ion-card-content>
+        <ion-icon (click)="markCompleted(step)" name="checkbox" isActive={{step.isCompleted}}></ion-icon>
       </ion-card>
     </ion-slide>
   </ion-slides>

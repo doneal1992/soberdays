@@ -1,78 +1,47 @@
-import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Rx';
 import { Injectable }     from '@angular/core';
+import {AuthService} from './auth.srvc';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Injectable()
 export class SoberClockService {
-  private dateSober: any;
-  private hasSoberDate: boolean = false;
-  private daysSober: any = 0;
-  private hoursSober: any = 0;
-  private minutesSober: any = 0;
-  private secondsSober: any = 0;
-  private startOfDay: any = new Date()
+  private soberDay: any;
+  private user: any;
+  private days: FirebaseListObservable<any>;
 
-  constructor(private storage: Storage) {
-    this.startOfDay.setHours(0,0,0,0);
-    this.storage.get("dateSober").then((value) => {
-      if(value) {
-        this.dateSober = value;
-        this.hasSoberDate = true;
-      }
-      let timer = Observable.timer(0,1000);
-      timer.subscribe(this.setSoberTime);
-    });
-  }
-
-  setSoberTime = () => {
-    this.setDaysSober();
-    this.setHoursSober();
-    this.setMinutesSober();
-    this.setSecondsSober();
-  }
-
-  getDaysSober = () : Observable<any> => {
-    return Observable.of(this.daysSober);
-  }
-
-  getHoursSober = () : Observable<any> => {
-    return Observable.of(this.hoursSober);
-  }
-
-  getMinutesSober = () : Observable<any> => {
-    return Observable.of(this.minutesSober);
-  }
-
-  getSecondsSober = () : Observable<any> => {
-    return Observable.of(this.secondsSober);
-  }
-
-  getHasSoberDate =() => {
-    return this.hasSoberDate;
+  constructor(private auth: AuthService, private af: AngularFireDatabase) {
+    this.init();
   }
 
   saveDate = (date : any) => {
-    return this.storage.set("dateSober", date).then(() => {
-          this.hasSoberDate = true;
+    this.soberDay.dateSober = date;
+    this.soberDay.userId = this.user.user_id;
+    return this.days.update('/soberDays', this.soberDay);
+  }
+
+  getSoberDay = (): Observable<any> => {
+    let day = new SoberDay();
+    return FirebaseListObservable.create(observer => {
+      this.days.subscribe(days => {
+      for(let day of days) {
+        if(day.userId === this.user.user_id) {
+          this.soberDay = day;
+          observer.next(this.soberDay);
+        }
+      }
+      });
     });
   }
 
-  private setDaysSober = () => {
-    const timeDiff = Math.abs(new Date().getTime() - new Date(this.dateSober).getTime());
-    this.daysSober = Math.ceil(timeDiff / (1000 * 3600 * 24));  
+  private init = () => {
+    this.days = this.af.list('/soberDays');
+    this.user = this.auth.getUser();
   }
+}
 
-  private setHoursSober = () => {
-    this.hoursSober = new Date().getHours(); 
-  }
+export class SoberDay {
+  public userId: any;
+  public dateSober: any;
 
-  private setMinutesSober = () => {
-   
-    this.minutesSober = new Date().getMinutes();
-  }
-
-  private setSecondsSober = () => {
-    this.secondsSober = new Date().getSeconds();
-  }
-
+  constructor() {}
 }

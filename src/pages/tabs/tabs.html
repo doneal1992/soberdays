@@ -5,8 +5,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-tabs color="primary">
-  <ion-tab [root]="tab1Root" tabTitle="Sober Clock" tabIcon="alarm"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Steps" tabIcon="clipboard"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Meditation" tabIcon="musical-note"></ion-tab>
-</ion-tabs>
+
+<ion-content padding>
+
+  <!-- a card with your picture and name, plus a logout button -->
+  <div *ngIf="auth.isAuthenticated()">
+    <ion-tabs color="primary">
+      <ion-tab [root]="tab1Root" tabTitle="Sober Clock" tabIcon="alarm"></ion-tab>
+      <ion-tab [root]="tab2Root" tabTitle="Steps" tabIcon="clipboard"></ion-tab>
+      <ion-tab [root]="tab3Root" tabTitle="Meditation" tabIcon="musical-note"></ion-tab>
+    </ion-tabs>
+  </div>
+
+</ion-content>
+
