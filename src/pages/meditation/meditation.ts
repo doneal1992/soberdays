@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
-import { YoutubeService } from '../../services/youtube.srvc'
+import { YoutubeService } from '../../services/youtube.service'
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 @Component({

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { SoberClockService, SoberDay } from '../../services/sober-clock.srvc';
+import { SoberDayService, SoberDay } from '../../services/sober-day.service';
 import {Observable} from 'rxjs/Rx';
 import { LoadingController } from 'ionic-angular'
+import * as moment from 'moment';
 
 @Component({
   selector: 'sober-clock',
@@ -16,7 +17,7 @@ export class SoberClockPage {
   private hideDate: boolean;
   private soberDay: SoberDay;
 
-  constructor(private soberClockService: SoberClockService, private loading: LoadingController) {
+  constructor(private soberClockService: SoberDayService, private loading: LoadingController) {
     this.init();
   }
 
@@ -46,10 +47,12 @@ export class SoberClockPage {
     });
     isLoading.present();
     this.soberClockService.getSoberDay().subscribe(day => {
-      this.soberDay = day;
-      this.hideDate = false;
-      let timer = Observable.timer(0,1000);
-      timer.subscribe(this.checkTime);
+      if(day.dateSober && day.userId) {
+        this.soberDay = day;
+        this.hideDate = false;
+        let timer = Observable.timer(0,1000);
+        timer.subscribe(this.checkTime);
+      }
       isLoading.dismiss();
     });
 
@@ -57,8 +60,7 @@ export class SoberClockPage {
   }
 
   private setDaysSober = () => {
-    const timeDiff = Math.abs(new Date().getTime() - new Date(this.soberDay.dateSober).getTime());
-    this.daysSober = Math.ceil(timeDiff / (1000 * 3600 * 24));  
+    this.daysSober = moment().diff(this.soberDay.dateSober, 'days');
   }
 
   private setHoursSober = () => {

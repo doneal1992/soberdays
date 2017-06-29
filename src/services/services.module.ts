@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { SoberClockService } from './sober-clock.srvc';
+import { SoberDayService } from './sober-day.service';
 import { IonicStorageModule } from '@ionic/storage';
-import { YoutubeService} from './youtube.srvc';
+import { YoutubeService} from './youtube.service';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
-import { AuthService } from './auth.srvc';
+import { AuthService } from './auth.service';
 import { AngularFireDatabase } from 'angularfire2/database';
  
 // AF2 Settings
@@ -29,7 +29,7 @@ export const firebaseConfig = {
   entryComponents: [
   ],
   providers: [
-    SoberClockService,
+    SoberDayService,
     YoutubeService,
     AuthService,
     AngularFireDatabase

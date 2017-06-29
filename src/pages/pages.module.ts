@@ -1,14 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { SoberClockPage } from '../pages/sober-clock/sober-clock';
 import { MeditationPage } from '../pages/meditation/meditation';
 import { TwelveStepsPage } from '../pages/twelve-steps/twelve-steps';
 import { TabsPage } from '../pages/tabs/tabs';
+import { JournalPage } from '../pages/journal/journal';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from '@ionic-native/date-picker';
 import { ServicesModule } from '../services/services.module';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
@@ -19,25 +17,25 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
     MeditationPage,
     TwelveStepsPage,
     TabsPage,
+    JournalPage
   ],
   imports: [
-    BrowserModule,
     IonicModule.forRoot(SoberClockPage),
     IonicModule.forRoot(MeditationPage),
     IonicModule.forRoot(TwelveStepsPage),
     IonicModule.forRoot(TabsPage),
+    IonicModule.forRoot(JournalPage),
     ServicesModule
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [],
   entryComponents: [
     SoberClockPage,
     MeditationPage,
     TwelveStepsPage,
     TabsPage,
+    JournalPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     YoutubeVideoPlayer

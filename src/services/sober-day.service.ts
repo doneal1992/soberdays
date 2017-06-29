@@ -1,10 +1,10 @@
 import {Observable} from 'rxjs/Rx';
 import { Injectable }     from '@angular/core';
-import {AuthService} from './auth.srvc';
+import {AuthService} from './auth.service';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Injectable()
-export class SoberClockService {
+export class SoberDayService {
   private soberDay: any;
   private user: any;
   private days: FirebaseListObservable<any>;
@@ -20,7 +20,6 @@ export class SoberClockService {
   }
 
   getSoberDay = (): Observable<any> => {
-    let day = new SoberDay();
     return FirebaseListObservable.create(observer => {
       this.days.subscribe(days => {
       for(let day of days) {
@@ -28,6 +27,8 @@ export class SoberClockService {
           this.soberDay = day;
           observer.next(this.soberDay);
         }
+
+        observer.next(new SoberDay());
       }
       });
     });
@@ -35,7 +36,7 @@ export class SoberClockService {
 
   private init = () => {
     this.days = this.af.list('/soberDays');
-    this.user = this.auth.getUser();
+    this.user = this.auth.getUser() || {};
   }
 }
 
