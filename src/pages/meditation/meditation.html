@@ -13,9 +13,9 @@
       </div>
       <div id="results">
         <div class="card-background-page">
-          <ion-card *ngFor="let video of videos.items">
+          <ion-card (click)="playVideo(video.id.videoId)" *ngFor="let video of videos.items">
             <div class="card-title">{{video.snippet.title}}</div>
-            <img (click)="playVideo(video.id.videoId)" src="{{video.snippet.thumbnails.high.url}}" />
+            <img src="{{video.snippet.thumbnails.high.url}}" />
           </ion-card>
         </div>
       </div>

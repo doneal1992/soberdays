@@ -1,0 +1,9 @@
+<ion-content padding>
+  <ion-item>
+    <ion-datetime class="centered-horizontal" displayFormat="MMMM DD YYYY" pickerFormat="MMMM DD YYYY" max="{{maxDate}}" [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-textarea [(ngModel)]="entry.text" placeholder="Enter a new journal post..."></ion-textarea>
+  </ion-item>
+  <button  ion-button full (click)="save()">Save Entry</button>
+<ion-content padding>

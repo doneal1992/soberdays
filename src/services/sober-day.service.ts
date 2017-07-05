@@ -1,25 +1,31 @@
 import {Observable} from 'rxjs/Rx';
 import { Injectable }     from '@angular/core';
 import {AuthService} from './auth.service';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import {FirebaseListObservable} from 'angularfire2/database';
+import { ObservableDataService } from './observable-data.service';
+
 
 @Injectable()
 export class SoberDayService {
-  private soberDay: any;
+  private soberDay: any = {};
   private user: any;
   private days: FirebaseListObservable<any>;
 
-  constructor(private auth: AuthService, private af: AngularFireDatabase) {
+  constructor(private auth: AuthService, private dataService: ObservableDataService) {
     this.init();
   }
 
-  saveDate = (date : any) => {
+  saveDate = (date : any): any => {
     this.soberDay.dateSober = date;
     this.soberDay.userId = this.user.user_id;
-    return this.days.update('/soberDays', this.soberDay);
+    if(this.soberDay.$key) {
+      return this.days.update(this.soberDay.$key, this.soberDay);
+    }
+
+    return this.days.push(this.soberDay);
   }
 
-  getSoberDay = (): Observable<any> => {
+  getSoberDay = (): FirebaseListObservable<SoberDay> => {
     return FirebaseListObservable.create(observer => {
       this.days.subscribe(days => {
       for(let day of days) {
@@ -27,21 +33,20 @@ export class SoberDayService {
           this.soberDay = day;
           observer.next(this.soberDay);
         }
-
-        observer.next(new SoberDay());
       }
-      });
+    });
+    observer.next({});
     });
   }
 
   private init = () => {
-    this.days = this.af.list('/soberDays');
+    this.days = this.dataService.getObservableData('/soberDays');
     this.user = this.auth.getUser() || {};
   }
 }
 
 export class SoberDay {
-  public userId: any;
+  public userId: any; 
   public dateSober: any;
 
   constructor() {}

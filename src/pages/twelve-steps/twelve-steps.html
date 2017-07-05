@@ -2,13 +2,12 @@
   <ion-slides pager>
     <ion-slide *ngFor="let step of steps">
       <ion-card>
-        <ion-card-header>
-          Step #{{step.stepNum}}
+        <ion-card-header [innerHtml]="'Step #' + step.stepNum">
         </ion-card-header>
-        <ion-card-content>
-          {{step.step}}
+        <ion-card-content [innerHtml]="step.step">
         </ion-card-content>
-        <ion-icon (click)="markCompleted(step)" name="checkbox" isActive={{step.isCompleted}}></ion-icon>
+        <button ion-button (click)="markCompleted(step)" *ngIf="!step.isCompleted" [innerHtml]="'Mark Completed'"></button>
+        <ion-icon (click)="markCompleted(step)" name="checkbox" *ngIf="step.isCompleted"></ion-icon>
       </ion-card>
     </ion-slide>
   </ion-slides>

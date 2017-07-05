@@ -6,6 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { ObservableDataService } from './observable-data.service';
+import { JournalService } from './journal.service';
+import { StepsService } from './steps.service';
  
 // AF2 Settings
 export const firebaseConfig = {
@@ -32,7 +35,10 @@ export const firebaseConfig = {
     SoberDayService,
     YoutubeService,
     AuthService,
-    AngularFireDatabase
+    AngularFireDatabase,
+    ObservableDataService,
+    JournalService,
+    StepsService
   ]
 })
 export class ServicesModule {}

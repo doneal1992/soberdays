@@ -11,16 +11,16 @@ export class MeditationPage {
   vPlayer = true;
   videos = {};
   search = {
-    params:''
+    params:'meditation music'
   };
  
   constructor(private youtubeService: YoutubeService,
     private loadingCtrl:LoadingController, 
     private youtubePlayer: YoutubeVideoPlayer) {
-      
+    this.findVideos();
   }
 
-  findVideos = ($event) => {
+  findVideos = ($event?) => {
     const loading = this.loadingCtrl.create();
 
     loading.present();

@@ -16,6 +16,7 @@ export class SoberClockPage {
   private secondsSober: number = 0;
   private hideDate: boolean;
   private soberDay: SoberDay;
+  private maxDate: any;
 
   constructor(private soberClockService: SoberDayService, private loading: LoadingController) {
     this.init();
@@ -29,23 +30,26 @@ export class SoberClockPage {
   }
 
   saveDate = () => {
-    const isLoading = this.loading.create({
-      showBackdrop: false,
+    const loading = this.loading.create({
+      showBackdrop: true,
       content: "Saving date..."
-    })
+    });
 
-    isLoading.present();
+    loading.present();
     this.soberClockService.saveDate(this.dateSober).then(() => {
-      isLoading.dismiss();
+      this.hideDate = false;
+      loading.dismiss();
     });;
   }
 
   private init = () => {
-    const isLoading  = this.loading.create({
-      showBackdrop: false,
+    this.maxDate = moment().toISOString();
+    this.hideDate = true;
+    const loading  = this.loading.create({
+      showBackdrop: true,
       content: "Loading please wait..."
     });
-    isLoading.present();
+    loading.present();
     this.soberClockService.getSoberDay().subscribe(day => {
       if(day.dateSober && day.userId) {
         this.soberDay = day;
@@ -53,10 +57,14 @@ export class SoberClockPage {
         let timer = Observable.timer(0,1000);
         timer.subscribe(this.checkTime);
       }
-      isLoading.dismiss();
+      loading.dismiss();
     });
 
-    this.hideDate = true;
+  }
+
+  onEditClick = () => {
+    this.hideDate = !this.hideDate;
+    this.dateSober = this.soberDay.dateSober;
   }
 
   private setDaysSober = () => {
@@ -64,16 +72,16 @@ export class SoberClockPage {
   }
 
   private setHoursSober = () => {
-    this.hoursSober = new Date().getHours(); 
+    this.hoursSober = moment().hours(); 
   }
 
   private setMinutesSober = () => {
    
-    this.minutesSober = new Date().getMinutes();
+    this.minutesSober = moment().minutes();
   }
 
   private setSecondsSober = () => {
-    this.secondsSober = new Date().getSeconds();
+    this.secondsSober = moment().seconds();
   }
 
 }

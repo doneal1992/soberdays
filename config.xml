@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="dlo.eng.soberdays" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>Sober Days</name>
+    <description>An app to assist those on the road to recovery.</description>
+    <author email="dannylamaroneal@gmail.com" />
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

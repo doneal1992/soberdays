@@ -6,6 +6,7 @@ import { MeditationPage } from '../pages/meditation/meditation';
 import { TwelveStepsPage } from '../pages/twelve-steps/twelve-steps';
 import { TabsPage } from '../pages/tabs/tabs';
 import { JournalPage } from '../pages/journal/journal';
+import { JournalEditPage } from '../pages/journal/edit/journal-edit';
 
 import { DatePicker } from '@ionic-native/date-picker';
 import { ServicesModule } from '../services/services.module';
@@ -17,7 +18,8 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
     MeditationPage,
     TwelveStepsPage,
     TabsPage,
-    JournalPage
+    JournalPage,
+    JournalEditPage
   ],
   imports: [
     IonicModule.forRoot(SoberClockPage),
@@ -25,6 +27,7 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
     IonicModule.forRoot(TwelveStepsPage),
     IonicModule.forRoot(TabsPage),
     IonicModule.forRoot(JournalPage),
+    IonicModule.forRoot(JournalEditPage),
     ServicesModule
   ],
   bootstrap: [],
@@ -33,7 +36,8 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
     MeditationPage,
     TwelveStepsPage,
     TabsPage,
-    JournalPage
+    JournalPage,
+    JournalEditPage
   ],
   providers: [
     DatePicker,

@@ -1,30 +1,25 @@
 <ion-content padding>
   <ion-grid>
-    <ion-row class="gutters center-page" *ngIf="hideDate">
+    <ion-row class="gutters center-page" text-center *ngIf="hideDate">
       <ion-col col-12>
         <ion-item >
-          <ion-datetime class="centered centered-horizontal" displayFormat="MM/DD/YYYY" [(ngModel)]="this.dateSober" placeholder="First Day Sober"></ion-datetime>
+          <ion-datetime class="centered-horizontal" displayFormat="MMMM DD YYYY" max="{{maxDate}}" [(ngModel)]="this.dateSober" placeholder="Enter sober date..."></ion-datetime>
         </ion-item>
       </ion-col>
-      <ion-col col-12 class="centered">
-        <button ion-button (click)='saveDate();'>Save</button>
+      <ion-col col-12>
+        <button ion-button [disabled]="!this.dateSober" (click)='saveDate();'>Save</button>
       </ion-col>
     </ion-row>
-    <ion-row class="gutters center-page" *ngIf="!hideDate">
-      <ion-col col-12 class="centered">
-        <span class="centered xlarge-font"> You have been sober for: </span>
-      </ion-col>
-      <ion-col col-12 class="centered xlarge-font">
-        <span> {{daysSober}} Days </span>
-      </ion-col>
-      <ion-col col-12 class="centered xlarge-font">
-        <span> {{hoursSober}} Hours </span>
-      </ion-col>
-      <ion-col col-12 class="centered xlarge-font">
-        <span> {{minutesSober}} Minutes </span>
-      </ion-col>
-      <ion-col col-12 class="centered xlarge-font">
-        <span> and {{secondsSober}} Seconds </span>
+    <ion-row class="gutters center-page xlarge-font" text-center *ngIf="!hideDate">
+      <ion-col col-12 [innerHtml]="'You have been sober for: '"></ion-col>
+      <ion-col col-12 [innerHtml]="daysSober + ' Days'"></ion-col>
+      <ion-col col-12 [innerHtml]="hoursSober + ' Hours'"></ion-col>
+      <ion-col col-12 [innerHtml]="minutesSober + ' Minutes'"></ion-col>
+      <ion-col col-12 [innerHtml]="'and ' + secondsSober + ' Seconds'"></ion-col>
+      <ion-col col-12>
+        <button ion-button clear icon-only (click)="onEditClick()">
+          <ion-icon name="create"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
