@@ -8,7 +8,7 @@ export class YoutubeService {
      maxResults = 10;
      url = 'https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=';
      constructor(public http: Http) {}
-     public getVideos(query:any){
+     getVideos = (query:any) => {
         return this.http.get(this.url+query+'&type=video&order=viewCount&maxResults='+this.maxResults+'&key='+this.googleToken)
          .map(res => res.json());
      }

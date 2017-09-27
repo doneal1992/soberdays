@@ -16,20 +16,19 @@ export class JournalService {
   }
 
   getJournalEntries = (): FirebaseListObservable<any> => {
-    return FirebaseListObservable.create(observer => {
-      this.journalEntries.subscribe(entries => {
-        observer.next(entries);
-      });
-    });
+    return this.journalEntries;
   }
 
   upsertEntry = (entry: any) => {
-    if(entry.$key) 
-    {
+    if(entry.$key) {
       this.journalEntries.update(entry.$key, entry);
     } else {
       this.journalEntries.push(entry);
     }
+  }
+
+  remove = (entry: any) => {
+    this.journalEntries.remove(entry.$key);
   }
 
 }

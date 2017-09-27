@@ -18,7 +18,7 @@ export class TwelveStepsPage {
     this.stepsService.completeStep(step);
   }
 
-  private init = () => {
+  init = () => {
     this.stepsService.getCompletedSteps().subscribe(steps => {
       this.steps = steps;
     });

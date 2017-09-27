@@ -9,10 +9,15 @@
     </ion-row>
     <ion-row>
       <ion-col col-12>
-        <ion-card (click)="editEntry(entry)" *ngFor="let entry of journalEntries">
-          <ion-card-header class="center-text" [innerHtml]="formatDate(entry)">
+        <ion-card *ngFor="let entry of journalEntries">
+          <ion-card-header class="center-text">
+            {{formatDate(entry)}}
+            <button (click)="removeEntry(entry)" ion-button icon-only clear top right color='danger'>
+              <ion-icon name="remove"></ion-icon>
+            </button>
           </ion-card-header>
-          <ion-card-content  text-center [innerHtml]="entry.text">
+          <hr>
+          <ion-card-content (click)="editEntry(entry)" text-center [innerHtml]="entry.text">
           </ion-card-content>
         </ion-card>
       </ion-col>

@@ -34,15 +34,16 @@ export class JournalPage {
   }
 
   editEntry = (journalEntry: any) => {
-    const editModal = this.modal.create(JournalEditPage, {entry: journalEntry});
+    journalEntry = journalEntry || {text: '', date: null};
+    const editModal = this.modal.create(JournalEditPage, {entry: journalEntry, selectedDate: this.selectedDate});
     editModal.present();
   }
 
   formatDate = (entry: any) => {
-    return moment(entry.date).format("MMMM DD YYYY");
+    return moment(entry.date).utc().format("MMMM DD YYYY");
   }
 
-  private init = () => {
+  init = () => {
     this.maxDate = moment().toISOString();
     this.selectedDate = moment().toISOString();
     this.selectedMoment = moment(this.selectedDate);
@@ -50,9 +51,13 @@ export class JournalPage {
     this.getEntries();
   }
 
-  private onDateChange = () => {
+  onDateChange = () => {
     this.selectedMoment = moment(this.selectedDate);
     this.journalService.setJournalPage(this.selectedMoment.year(), this.selectedMoment.month());
     this.getEntries();
+  }
+
+  removeEntry = (entry: any) => {
+    this.journalService.remove(entry);
   }
 }

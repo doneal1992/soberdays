@@ -3,7 +3,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { ObservableDataService } from './observable-data.service';
 import { AuthService } from './auth.service';
 import { TwelveSteps } from '../common/constants/twelve-steps.cnst'
-
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class StepsService {
@@ -13,19 +13,15 @@ export class StepsService {
     this.init();
   }
 
-  getCompletedSteps = () => {
-    return FirebaseListObservable.create(observer => {
-      this.steps.subscribe(steps => {
-        observer.next(steps);
-      });
-    });
+  getCompletedSteps = (): Observable<any> => {
+    return this.steps.filter(step => step.isCompleted = true);
   }
 
   completeStep = (step: any) => {
     this.steps.update(step.$key, step);
   }
 
-  private init = () => {
+  init = () => {
     this.steps = this.dataService.getObservableData("/steps/" + this.auth.getUser().user_id);
     this.steps.subscribe(steps => {
       if(steps.length === 0) {

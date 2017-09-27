@@ -42,7 +42,7 @@ export class SoberClockPage {
     });;
   }
 
-  private init = () => {
+  init = () => {
     this.maxDate = moment().toISOString();
     this.hideDate = true;
     const loading  = this.loading.create({
@@ -67,20 +67,20 @@ export class SoberClockPage {
     this.dateSober = this.soberDay.dateSober;
   }
 
-  private setDaysSober = () => {
+  setDaysSober = () => {
     this.daysSober = moment().diff(this.soberDay.dateSober, 'days');
   }
 
-  private setHoursSober = () => {
+  setHoursSober = () => {
     this.hoursSober = moment().hours(); 
   }
 
-  private setMinutesSober = () => {
+  setMinutesSober = () => {
    
     this.minutesSober = moment().minutes();
   }
 
-  private setSecondsSober = () => {
+  setSecondsSober = () => {
     this.secondsSober = moment().seconds();
   }
 

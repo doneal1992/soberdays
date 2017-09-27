@@ -60,7 +60,8 @@ export class AuthService {
     const client = new Auth0Cordova(auth0Config);
 
     const options = {
-      scope: 'openid profile offline_access'
+      scope: 'openid profile offline_access',
+      name: ""
     };
 
     client.authorize(options, (err, authResult) => {

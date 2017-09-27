@@ -25,21 +25,12 @@ export class SoberDayService {
     return this.days.push(this.soberDay);
   }
 
-  getSoberDay = (): FirebaseListObservable<SoberDay> => {
-    return FirebaseListObservable.create(observer => {
-      this.days.subscribe(days => {
-      for(let day of days) {
-        if(day.userId === this.user.user_id) {
-          this.soberDay = day;
-          observer.next(this.soberDay);
-        }
-      }
-    });
-    observer.next({});
-    });
+  getSoberDay = (): Observable<SoberDay> => {
+    return this.days.map(days => 
+      days.filter(day => day.userId === this.user.user_id)[0]);
   }
 
-  private init = () => {
+  init = () => {
     this.days = this.dataService.getObservableData('/soberDays');
     this.user = this.auth.getUser() || {};
   }
@@ -48,6 +39,4 @@ export class SoberDayService {
 export class SoberDay {
   public userId: any; 
   public dateSober: any;
-
-  constructor() {}
 }
