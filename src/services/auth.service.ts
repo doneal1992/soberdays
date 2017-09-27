@@ -1,25 +1,17 @@
 
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { Auth0Config } from '../common/constants/auth0.config.cnst';
 
 import Auth0Cordova from '@auth0/cordova';
 import Auth0 from 'auth0-js';
 
-const auth0Config = {
-  // needed for auth0
-  clientID: 'sRHP0Jdw3kC-ZRm9tGneb4IDlHSjQpsJ',
 
-  // needed for auth0cordova
-  clientId: 'sRHP0Jdw3kC-ZRm9tGneb4IDlHSjQpsJ',
-  domain: 'soberdays.auth0.com',
-  callbackURL: location.href,
-  packageIdentifier: 'dlo.eng.soberdays'
-};
 
 
 @Injectable()
 export class AuthService {
-  auth0 = new Auth0.WebAuth(auth0Config);
+  auth0 = new Auth0.WebAuth(Auth0Config);
   accessToken: string;
   idToken: string;
   user: any;
@@ -57,7 +49,7 @@ export class AuthService {
   }
 
   public login() {
-    const client = new Auth0Cordova(auth0Config);
+    const client = new Auth0Cordova(Auth0Config);
 
     const options = {
       scope: 'openid profile offline_access',
